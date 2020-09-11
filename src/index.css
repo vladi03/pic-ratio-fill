@@ -1,0 +1,49 @@
+html, body, #app {
+  height: 100%;
+}
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.stripe-table tr:nth-child(even) {
+  background-color: #fdfdfd
+}
+
+.stripe-table thead tr {
+  height: 36.8px;
+}
+
+.stripe-table th {
+  background-color: #b9c7d4;
+  font-weight: bold;
+  font-size: 16px;
+  border-bottom: 2px solid #ddd;
+  border-right: 1px solid #F5F5F5
+}
+
+.stripe-table th.sorted {
+  background-color: #3d6090;
+}
+
+.stripe-table th.sorted span {
+  color: white;
+}
+
+.stripe-table td, .stripe-table th {
+  padding: 0 0 0 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100px;
+}
+
+.grid-transition div {
+  -webkit-transition: width 2s; /* Safari */
+  transition: width 2s;
+}
+
+.stripe-table svg {
+    color: white !important;
+}
