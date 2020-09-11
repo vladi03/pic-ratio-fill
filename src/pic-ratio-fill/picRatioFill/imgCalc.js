@@ -51,7 +51,8 @@ export const getMaxColor = (imageTarget, willFitWidth, doOpposite = false) => {
 
         const calcColors = () => {
             const color = colorThief.getColor(objImg);
-            resolve(color);
+            const pallet = colorThief.getPalette(objImg, 7);
+            resolve({color, pallet, main: color});
         };
 
         if(objImg.complete) {
