@@ -1,5 +1,6 @@
 import React from "react";
 import {PicRatioFill} from "./picRatioFill/PicRatioFill";
+export {PicRatioFill};
 
 export const PicRatioExample = ()=> {
     const onChange = (results) => console.log(results);
