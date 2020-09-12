@@ -10,6 +10,16 @@ color from the closest edge.
 npm install pic-ratio-fill
 ```
 
+# Code Use
+```
+            <PicRatioFill
+                src="sample2.jpg"
+                width={330}
+                height={260}
+                onChangeColors={onChange}
+            />
+```
+
 # Example
 The following example shows a table with all the functionality:
 [Running Example](https://vladi03.github.io/pic-ratio-fill/ "Pic Ratio Fill")
