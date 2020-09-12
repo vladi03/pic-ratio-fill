@@ -1,6 +1,6 @@
 {
   "name": "pic-ratio-fill",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Fit images with in an aspect ratio.  If the image does not fit, the component will fill in the area needed with a color that fits the image",
   "main": "pic-ration-fill.js",
   "files": [
