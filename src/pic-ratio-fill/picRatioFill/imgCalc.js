@@ -1,15 +1,23 @@
 import ColorThief from "colorthief";
 
-export const calcImage = async (img, containerWidth, containerHeight) => {
-    const imageWidth = img.naturalWidth;
-    const imageHeight = img.naturalHeight;
-    const willFitWidth = calcWillFitWidth(containerWidth, containerHeight,
-        imageWidth, imageHeight);
+export const calcImage = (img, containerWidth, containerHeight) => {
+    return new Promise((resolve, reject)=> {
+        const imageWidth = img.naturalWidth;
+        const imageHeight = img.naturalHeight;
+        const willFitWidth = calcWillFitWidth(containerWidth, containerHeight,
+            imageWidth, imageHeight);
 
-    const colorRgb = await getMaxColor(img, willFitWidth);
-    const colorRgbOpposite = await getMaxColor(img, willFitWidth, true);
+        const colorRgb = getMaxColor(img, willFitWidth);
+        const colorRgbOpposite = getMaxColor(img, willFitWidth, true);
 
-    return {willFitWidth, colorRgb, colorRgbOpposite};
+        Promise.all([colorRgb, colorRgbOpposite])
+            .then(results => {
+                resolve({willFitWidth,
+                    colorRgb: results[0],
+                    colorRgbOpposite: results[1]
+                });
+            }).catch(reject);
+    });
 };
 
 export const calcWillFitWidth = (containerWidth, containerHeight, imageWidth, imageHeight) => {
@@ -17,6 +25,7 @@ export const calcWillFitWidth = (containerWidth, containerHeight, imageWidth, im
 };
 
 export const getMaxColor = (imageTarget, willFitWidth, doOpposite = false) => {
+    // noinspection JSUnusedLocalSymbols
     return new Promise((resolve, reject) => {
         const sliverSize = 15;
         const img = imageTarget;

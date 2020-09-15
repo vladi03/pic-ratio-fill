@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build:local": "nwb build-react-app --copy-files",
-    "build": "cross-env NODE_ENV=production babel ./src/pic-ratio-fill --out-dir ./lib ",
+    "build": "cross-env NODE_ENV=production babel ./src/pic-ratio-fill --out-dir ./lib",
     "version:minor": "npm version minor",
     "test": "mocha ./test/.setup.js --require @babel/register --recursive ./test",
     "start": "nwb serve-react-app --copy-files",
