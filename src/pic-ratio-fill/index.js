@@ -1,6 +1,8 @@
 import React from "react";
 import {PicRatioFill} from "./picRatioFill/PicRatioFill";
-export {PicRatioFill};
+import {PicRatioView} from "./picRatioFill/PicRatioView";
+
+export {PicRatioFill, PicRatioView};
 
 export const PicRatioExample = ()=> {
     const onChange = (results) => console.log(results);
@@ -22,7 +24,15 @@ export const PicRatioExample = ()=> {
                 height={260}
                 onChangeColors={onChange}
             />
-
+            <p>Example : View Only</p>
+            <PicRatioView
+                src="sample.jpg"
+                width={330}
+                height={260}
+                colorRgb={[216, 211, 195]}
+                colorRgbOpposite={[128, 120, 98]}
+	            willFitWidth={true}
+            />
         </div>
     )
 };
