@@ -33,6 +33,15 @@ export const PicRatioExample = ()=> {
                 colorRgbOpposite={[128, 120, 98]}
 	            willFitWidth={true}
             />
+            <p>Example : View Only</p>
+            <PicRatioView
+                src="sample2.jpg"
+                width={330}
+                height={260}
+                colorRgb={[216, 211, 195]}
+                colorRgbOpposite={[128, 120, 98]}
+                willFitWidth={false}
+            />
         </div>
     )
 };
