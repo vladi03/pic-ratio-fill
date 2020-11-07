@@ -15,38 +15,42 @@ export const PicRatioView = ({src, width, height, style,
     if(imageSrc && src !== imageSrc) {
         setImageSrc(src);
     }
-    const colorRgbValue = colorRgb && colorRgb.length > 2 ?
+    const colorRgbValue = colorRgb && colorRgb.length > 2
+        && imageSrc !== false ?
         `rgb(${colorRgb[0]},${colorRgb[1]}, ${colorRgb[2]})`:
         "rgb(0,0,0)";
 
-    const colorRgbOppositeValue = colorRgbOpposite && colorRgbOpposite.length > 2 ?
+    const colorRgbOppositeValue = colorRgbOpposite && colorRgbOpposite.length > 2
+        && imageSrc !== false ?
         `rgb(${colorRgbOpposite[0]},${colorRgbOpposite[1]}, ${colorRgbOpposite[2]})` :
         "rgb(0,0,0)";
+
+    const calcWillFitWidth = imageSrc === false || willFitWidth;
 
     return (
         <div className={classes.editContainer}>
             <div
                 style={style}
-                className={willFitWidth ?
+                className={calcWillFitWidth ?
                     classes.imageContainerWidthFit :
                     classes.imageContainerHeightFit
                 }
             >
                 <div
-                    className={willFitWidth ?
+                    className={calcWillFitWidth ?
                         classes.picBorderWidth :
                         classes.picBorderHeight}
                     style={{backgroundColor: colorRgbValue}}
                 />
 
                 <div
-                    className={willFitWidth ?
+                    className={calcWillFitWidth ?
                         classes.fitWidth :
                         classes.fitHeight}
                 >
                     <img
                         src={imageSrc || staticImage}
-                        className={willFitWidth ?
+                        className={calcWillFitWidth ?
                             classes.fitWidth :
                             classes.fitHeight}
                         onLoad={() => {
@@ -58,7 +62,7 @@ export const PicRatioView = ({src, width, height, style,
                 </div>
 
                 <div
-                    className={willFitWidth ?
+                    className={calcWillFitWidth ?
                         classes.picBorderWidth :
                         classes.picBorderHeight}
                     style={{backgroundColor: colorRgbOppositeValue}}
