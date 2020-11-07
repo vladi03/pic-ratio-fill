@@ -11,9 +11,11 @@ export const PicRatioView = ({src, width, height, style,
         containerHeight: height
     });
     const [imageSrc, setImageSrc] = useState(false);
+    const [calcWillFitWidth, setCalcWillFitWidth] = useState(false);
 
     if(imageSrc && src !== imageSrc) {
         setImageSrc(src);
+        setCalcWillFitWidth(willFitWidth);
     }
     const colorRgbValue = colorRgb && colorRgb.length > 2
         && imageSrc !== false ?
@@ -24,8 +26,6 @@ export const PicRatioView = ({src, width, height, style,
         && imageSrc !== false ?
         `rgb(${colorRgbOpposite[0]},${colorRgbOpposite[1]}, ${colorRgbOpposite[2]})` :
         "rgb(0,0,0)";
-
-    const calcWillFitWidth = imageSrc === false || willFitWidth;
 
     return (
         <div className={classes.editContainer}>
@@ -56,6 +56,7 @@ export const PicRatioView = ({src, width, height, style,
                         onLoad={() => {
                             if (!imageSrc) {
                                 setImageSrc(src);
+                                setCalcWillFitWidth(willFitWidth);
                             }
                         }}
                     />
