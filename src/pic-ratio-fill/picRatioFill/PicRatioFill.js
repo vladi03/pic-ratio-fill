@@ -3,6 +3,8 @@ import {makeStyles} from "@material-ui/core/styles";
 import {calcImage} from "./imgCalc";
 import {ColorPicker} from "./ColorPicker";
 
+const staticImage = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAOiSURBVHhe7do7SyNRGMbx/RyCYOv24n4GLSxdCxVRFLyiiZdEk3hL1gtYaGnh5QvYxjLp1aS0kU0hbAolsFgI6ruc4ytGk0myojOch+cHh3lnIkzxJ8PMxG9C0BgYHAODY2BwDAyOgcExMDgGBsfA4BgYHAODY2BwDAyOgcExMDgGBsfA4BgYHAODY2BwDAyOgcExMDgGBsfA4BgYHAODY2BwDAyOgcExMDgGBsfA4BgYHAODY2BwDAyOgcExMDgGBsfA4BgYHAODY2BwDAyOgcExMDgGBuds4NnZWYlGoxVraWnp09fc3JxkMhk9s1ucDLy/vy+3t7e6549QKKSTW5wMfHR0JMU/Rd3zh7k6uMjNwMevgVtaWiSZTEosFrMrEU98ykolU9L6vdWewzCXahc5HzgcDtvtV9je3tZJZHFxUSe3OB94cnLSbr/C+vq6TgzsK6/A9/f3MjQ0ZG+IstmsHv04Bg6IV+CRkRGdREZHR3Wq7vr6WsbGxmR8fFxKpZIefYuBA+IVuHxOJBI6Vcrn8zI1NaV7Ij09PVL4XdC9VwwcEK/AZ2dnMjw8LJFIRPb29vToWxcXFxIKVz7T9vf3V0Rm4IB89CYrn8vbN2Be3kdm4IDUC/z09KTTK3NZNq8cjcfHR7utpq+vTwqF58gMHJD//Qbncrma39z3TOSbmxs+BwelXmBzN21egExPT8vV1ZXMz8/rJ40zd+GDg4O6x8C+qhW4q6tLp2dNTU12W+2yXU/7j3adGNhXXoE7Ozt1esvreD27u7s6MbCvygPPzMzYba2IDw8P0tHRoXveisWipNNp2dnZsc/RbW1t+gkD+6o88MTEhH1R0Yjun906iQ358k8C8XhcFhYW5PDw0D5Lm1eextbWlt0aDOyj8sDNzc12W89p+tReznt7eyWVSsn5+bl+4o2PSQEpD1zrd9qTkxOJRCOysrIil5eXerRxq6urOjGwr8oDm3jmMmsCvF9ra2uyubkpG782ZHl5uerf1Fsv+IO/jw4ODuTu753u+YOBfWR+6x0YGLB3uuZb9vLvOl+1zHnM+VzkZGBqHAODY2BwDAyOgcExMDgGBsfA4BgYHAODY2BwDAyOgcExMDgGBsfA4BgYHAODY2BwDAyOgcExMDgGBsfA4BgYHAODY2BwDAyOgcExMDgGBsfA4BgYHAODY2BwDAyOgcExMDgGBsfA4BgYHAODY2BwDAyOgcExMDgGBsfA4BgYmsg/zgu6X0Ra40gAAAAASUVORK5CYII=";
+
 export const PicRatioFill = ({src, width, height, style, onChangeColors}) => {
 
     const classes = useStyle({
@@ -10,6 +12,7 @@ export const PicRatioFill = ({src, width, height, style, onChangeColors}) => {
         containerHeight: height
     });
     const [selectedFill, setSelectedFill] = useState(0);
+    const [imageSrc, setImageSrc] = useState(false);
 
     const [colorCalc, setColorCalc] = useState({
         willFitWidth: true,
@@ -40,21 +43,25 @@ export const PicRatioFill = ({src, width, height, style, onChangeColors}) => {
                 className={willFitWidth ? classes.fitWidth : classes.fitHeight}
             >
             <img
-                src={src}
+                src={imageSrc || staticImage}
                 className={willFitWidth ? classes.fitWidth : classes.fitHeight}
                 onLoad={(event) => {
-                    calcImage(event.target, width, height).then(
-                        (result) => {
-                            console.log(result);
-                            setColorCalc(result);
-                            if(onChangeColors)
-                                onChangeColors({
-                                    colorRgb: result.colorRgb.color,
-                                    colorRgbOpposite: result.colorRgbOpposite.color,
-                                    willFitWidth: result.willFitWidth
-                                })
-                        }
-                    );
+                    if(imageSrc) {
+                        calcImage(event.target, width, height).then(
+                            (result) => {
+                                console.log(result);
+                                setColorCalc(result);
+                                if (onChangeColors)
+                                    onChangeColors({
+                                        colorRgb: result.colorRgb.color,
+                                        colorRgbOpposite: result.colorRgbOpposite.color,
+                                        willFitWidth: result.willFitWidth
+                                    })
+                            }
+                        );
+                    } else {
+                        setImageSrc(src);
+                    }
                 }}
             />
             </div>
