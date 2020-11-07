@@ -11,7 +11,9 @@ export const PicRatioView = ({src, width, height, style,
         containerHeight: height
     });
     const [imageSrc, setImageSrc] = useState(false);
+    if(imageSrc) {
 
+    }
     const colorRgbValue = colorRgb && colorRgb.length > 2 ?
         `rgb(${colorRgb[0]},${colorRgb[1]}, ${colorRgb[2]})`:
         "rgb(0,0,0)";
@@ -47,9 +49,8 @@ export const PicRatioView = ({src, width, height, style,
                             classes.fitWidth :
                             classes.fitHeight}
                         onLoad={() => {
-                            if (imageSrc) {
-
-                            } else {
+                            if (!imageSrc ||
+                                (imageSrc && src !== imageSrc)) {
                                 setImageSrc(src);
                             }
                         }}
