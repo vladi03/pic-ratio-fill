@@ -20,12 +20,12 @@ export const PicRatioView = ({src, width, height, style,
     const colorRgbValue = colorRgb && colorRgb.length > 2
         && imageSrc !== false ?
         `rgb(${colorRgb[0]},${colorRgb[1]}, ${colorRgb[2]})`:
-        "rgb(0,0,0)";
+        "rgb(255,255,255)";
 
     const colorRgbOppositeValue = colorRgbOpposite && colorRgbOpposite.length > 2
         && imageSrc !== false ?
         `rgb(${colorRgbOpposite[0]},${colorRgbOpposite[1]}, ${colorRgbOpposite[2]})` :
-        "rgb(0,0,0)";
+        "rgb(255,255,255)";
 
     return (
         <div className={classes.editContainer}>
