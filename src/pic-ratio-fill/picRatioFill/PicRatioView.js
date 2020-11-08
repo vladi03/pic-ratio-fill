@@ -55,8 +55,12 @@ export const PicRatioView = ({src, width, height, style,
                             classes.fitHeight}
                         onLoad={() => {
                             if (!imageSrc) {
-                                setImageSrc(src);
-                                setCalcWillFitWidth(willFitWidth);
+                                const imgTemp = new Image();
+                                imgTemp.onload = () => {
+                                    setImageSrc(imgTemp.src);
+                                    setCalcWillFitWidth(willFitWidth);
+                                };
+                                imgTemp.src = src;
                             }
                         }}
                     />
